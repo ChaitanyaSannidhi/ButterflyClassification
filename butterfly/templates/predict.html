@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Predict - ButterflyGaze</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">ButterflyGaze</div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/predict">Predict</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <h2>Upload an Image</h2>
+        <p>Select a butterfly image below to classify its species.</p>
+    </div>
+
+    <div class="upload-box">
+        <form action="/predict" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required>
+            <br><br>
+            <input type="submit" value="Predict">
+        </form>
+
+        {% if butterfly %}
+            <div class="result-box">
+                <h3>Predicted Butterfly: {{ butterfly }}</h3>
+                <img src="{{ url_for('static', filename='images/' + user_image_file_path) }}" width="300">
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <p style="color:red;">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
